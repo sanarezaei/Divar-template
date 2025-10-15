@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ ad.title }}{% endblock %}
+{% block content %}
+
+<div class="card shadow-sm p-4">
+    <h2 class="text-danger">{{ ad.title }}</h2>
+    <p class="text-muted mb-1">دسته: {{ ad.category }}</p>
+    <p class="text-muted small">تاریخ: {{ ad.created_at|date:"Y/m/d H:i" }}</p>
+
+    {% if ad.image %}
+        <img src="{{ ad.image.url }}" class="img-fluid rounded my-3" style="max-height: 400px; object-fit: cover;">
+    {% endif %}
+
+    <p class="lead">{{ ad.description }}</p>
+
+    {% if user == ad.owner %}
+        <hr>
+        <a href="{% url 'ads:ad_update' ad.pk %}" class="btn btn-warning">ویرایش</a>
+        <a href="{% url 'ads:ad_delete' ad.pk %}" class="btn btn-danger">حذف</a>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block style %}
+        <style>
+        body {
+            background: linear-gradient(135deg, #f9fafb, #e3f2fd);
+            font-family: "Vazirmatn", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            color: #0d6efd;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        footer {
+            background-color: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            font-size: 0.9rem;
+        }
+        .btn-custom {
+            padding: 10px 25px;
+            border-radius: 30px;
+        }
+    </style>
+{% endblock style %}
+
+{% block content %}
+    <nav class="navbar navbar-expand-lg bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="{% url 'home' %}">🌟 My Ads</a>
+            <div>
+                {% comment %} {% if user.is_authenticated %}
+                    <span class="me-3">سلام، {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">خروج</a>
+                {% else %} {% endcomment %}
+                    {% comment %} <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm me-2">ورود</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-sm">ثبت‌نام</a>
+                {% endif %} {% endcomment %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container hero">
+        {% comment %} {% if user.is_authenticated %}
+            <h1>خوش اومدی {{ user.username }} 🌸</h1>
+            <p>اینجا می‌تونی آگهی‌هات رو مدیریت کنی یا آگهی جدید بسازی.</p>
+            <a href="{% url 'ad_list' %}" class="btn btn-primary btn-custom mt-3">مشاهده آگهی‌ها</a>
+            <a href="{% url 'ad_create' %}" class="btn btn-success btn-custom mt-3">افزودن آگهی جدید</a>
+        {% else %}
+            <h1>به My Ads خوش اومدی 💫</h1>
+            <p>برای ثبت آگهی‌ها و مشاهده‌ی دیگران، لطفاً وارد حساب خودت شو یا ثبت‌نام کن.</p>
+            <div class="mt-4">
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-custom">ورود</a>
+                <a href="{% url 'register' %}" class="btn btn-primary btn-custom">ثبت‌نام</a>
+            </div>
+        {% endif %} {% endcomment %}
+    </div>
+{% endblock content %}

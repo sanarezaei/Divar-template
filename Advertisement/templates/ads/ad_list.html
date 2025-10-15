@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}لیست آگهی‌ها{% endblock %}
+{% block content %}
+
+{% include "ads/search.html" %}
+
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- 🟥 ستون سمت راست: تگ‌ها -->
+    <aside class="col-md-3 mb-4">
+        {% include "ads/tag.html" %}
+    </aside>
+
+    <!-- 🟩 ستون سمت چپ: لیست آگهی‌ها -->
+    <section class="col-md-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="fw-bold">📋 لیست آگهی‌ها</h3>
+            {% if user.is_authenticated %}
+                <a href="{% url 'ads:ad_create' %}" class="btn btn-danger">+ ثبت آگهی جدید</a>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            {% for ad in ads %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        {% if ad.image %}
+                            <img src="{{ ad.image.url }}" class="card-img-top" style="height:200px; object-fit:cover;">
+                        {% else %}
+                            <img src="https://via.placeholder.com/400x200?text=No+Image" class="card-img-top">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">{{ ad.title }}</h5>
+                            <p class="text-muted small mb-1">دسته: {{ ad.category }}</p>
+                            <p class="card-text">{{ ad.description|truncatechars:80 }}</p>
+                            <a href="{% url 'ads:ad_detail' ad.pk %}" class="btn btn-outline-danger btn-sm mt-2">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center text-muted">هنوز آگهی‌ای ثبت نشده 😅</p>
+            {% endfor %}
+        </div>
+    </section>
+
+  </div>
+</div>
+
+{% endblock %}

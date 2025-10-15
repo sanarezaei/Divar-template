@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}حذف آگهی{% endblock %}
+{% block content %}
+
+<div class="card p-4 text-center shadow-sm">
+    <h4>❗ آیا مطمئنی می‌خوای آگهی "<strong>{{ object.title }}</strong>" رو حذف کنی؟</h4>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2">بله، حذفش کن</button>
+        <a href="{% url 'ads:ad_list' %}" class="btn btn-secondary">انصراف</a>
+    </form>
+</div>
+
+{% endblock %}

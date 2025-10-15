@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Edit Profile{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 rounded-4" style="max-width: 600px; margin: auto;">
+    <h3 class="text-center mb-4">✏️ Edit Your Profile</h3>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        {{ form.phone|add_class:"form-control" }}
+        {{ form.phone.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Bio</label>
+        {{ form.bio|add_class:"form-control" }}
+        {{ form.bio.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">City</label>
+        {{ form.city|add_class:"form-select" }}
+        {{ form.city.errors }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Profile Image</label>
+        {{ form.profile_image }}
+        {{ form.profile_image.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">💾 Save Changes</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'profile_detail' %}" class="text-secondary text-decoration-none">← Back to profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

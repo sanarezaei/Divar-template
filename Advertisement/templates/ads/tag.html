@@ -1,0 +1,19 @@
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header bg-danger text-white fw-bold text-center">
+        🏷️ تگ‌ها
+    </div>
+
+    {% if tags %}
+        <div class="list-group list-group-flush">
+            {% for tag in tags %}
+                <a href="{% url 'ads:tag' tag.slug %}"
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span>#{{ tag.name }}</span>
+                    <span class="badge bg-danger text-white">{{ tag.ads.count }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="p-3 text-muted text-center mb-0">تگی وجود ندارد 😅</p>
+    {% endif %}
+</div>

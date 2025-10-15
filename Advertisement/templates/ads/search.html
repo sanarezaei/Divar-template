@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4 text-success">
+    🔍 Search Ads
+  </h2>
+
+  <!-- Search Form -->
+  <form method="GET" action="{% url 'ads:search' %}" class="mb-4">
+    <div class="input-group">
+      <input
+        type="text"
+        name="searched"
+        class="form-control"
+        placeholder="Search ads..."
+        value="{{ searched|default_if_none:'' }}"
+        required
+      />
+      <button class="btn btn-success" type="submit">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+  </form>
+
+  <!-- Search Results -->
+  {% if searched %}
+    <h5 class="mt-4">Search results for: 
+      <span class="text-success fw-bold">{{ searched }}</span>
+    </h5>
+    <hr>
+
+    {% if ad_titles %}
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+        {% for ad in ad_titles %}
+          <div class="col">
+            <div class="card shadow-sm h-100 border-0">
+              {% if ad.image %}
+                <img src="{{ ad.image.url }}" class="card-img-top" alt="{{ ad.title }}">
+              {% else %}
+                <img src="{% static 'images/no-image.jpg' %}" class="card-img-top" alt="No image">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title text-success">{{ ad.title }}</h5>
+                <p class="card-text text-muted">{{ ad.description|truncatewords:20 }}</p>
+                <a href="{% url 'ads:ad_detail' ad.pk %}" class="btn btn-outline-success btn-sm w-100">
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted mt-3">No ads found matching your search.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}
