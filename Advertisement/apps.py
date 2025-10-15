@@ -6,4 +6,4 @@ class AdvertisementConfig(AppConfig):
     name = "Advertisement"
 
     def ready(self) -> None:
-        import Advertisement.signals   # noqa: F401
+        import Advertisement.signals  # noqa: F401

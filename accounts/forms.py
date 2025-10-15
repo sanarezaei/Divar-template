@@ -1,10 +1,7 @@
 from typing import Any, Optional, cast
 
-from django.contrib.auth.forms import (
-    AuthenticationForm,
-    SetPasswordForm,
-    UserCreationForm,
-)
+from django.contrib.auth.forms import (AuthenticationForm, SetPasswordForm,
+                                       UserCreationForm)
 from django.forms import Field
 from django.http import HttpRequest
 
